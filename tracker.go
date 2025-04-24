@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"time"
 )
@@ -65,6 +66,19 @@ func loadTask(filename string) ([]Task, error) {
 		return nil, err
 	}
 	return task, err
+}
+
+func saveTask(filename string, task []Task) error {
+	file, err := json.MarshalIndent(task, "", " ")
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile(filename, file, 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func addTask(description string, filename string) error {
