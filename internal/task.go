@@ -20,4 +20,12 @@ type Task struct {
 	UpdatedAt   time.Time `json:"updatedat"`
 }
 
-type NewTask struct{}
+func NewTask(id int32, description string) *Task {
+	return &Task{
+		ID:          id,
+		Description: description,
+		Status:      STATUS_TODO,
+		CreatedAt:   time.Now(),
+		UpdatedAt:   time.Now(),
+	}
+}
