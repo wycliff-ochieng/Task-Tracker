@@ -1,40 +1,32 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
+	"errors"
 
 	"github.com/spf13/cobra"
+	"github.com/wycliff-ochieng/task-tracker/internal/task"
 )
 
 // addCmd represents the add command
-var addCmd = &cobra.Command{
-	Use:   "add",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
-	},
+func NewAddCommand() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "add",
+		Short: "adding tasks to task list",
+		Long:  "command for adding task to your tracker",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return runAddTaskCmd(args)
+		},
+	}
+	return cmd
 }
 
-func init() {
-	rootCmd.AddCommand(addCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// addCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// addCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func runAddTaskCmd(args []string) error {
+	if len(args) == 0 {
+		return errors.New("Kindly input a description")
+	}
+	description := runAddTaskCmd(args)
+	return task.AddTask(description)
 }
