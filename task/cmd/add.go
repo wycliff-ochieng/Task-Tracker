@@ -17,16 +17,16 @@ func NewAddCommand() *cobra.Command {
 		Short: "adding tasks to task list",
 		Long:  "command for adding task to your tracker",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return runAddTaskCmd(args)
+			return RunAddTaskCmd(args)
 		},
 	}
 	return cmd
 }
 
-func runAddTaskCmd(args []string) error {
+func RunAddTaskCmd(args []string) error {
 	if len(args) == 0 {
 		return errors.New("Kindly input a description")
 	}
-	description := runAddTaskCmd(args)
+	description := RunAddTaskCmd(args)
 	return task.AddTask(description)
 }
