@@ -29,3 +29,5 @@ func NewTask(id int32, description string) *Task {
 		UpdatedAt:   time.Now(),
 	}
 }
+
+func AddtTask() Task {}
